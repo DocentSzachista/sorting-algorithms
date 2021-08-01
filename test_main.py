@@ -5,7 +5,9 @@ import pytest
 # happy path - sorted asc 
 @pytest.mark.parametrize("test_input,expected", [
     ([1,4,2,3],[1,2,3,4]),
-    ([4,3,5,1],[1,3,4,5])
+    ([4,3,5,1],[1,3,4,5]),
+    ([], []),
+    (None, None)
     ])
 # items sorted asc
 class TestAsc:
@@ -18,9 +20,11 @@ class TestAsc:
         assert test_input == expected
     
     def test_quick_sort(self, test_input, expected):
-        quick_sort(test_input, 0, len(test_input)-1)
-        assert test_input == expected
-    
+        try:
+            quick_sort(test_input, 0, len(test_input)-1)
+            assert test_input == expected
+        except TypeError:
+            print("Your input array can't be a null value")
     #def test_merge_sort(self, test_input, expected):
     #    assert True
     

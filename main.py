@@ -7,29 +7,39 @@ def bubble_sort(array) ->None:
         Sorts the array by compairing two neightbouring array elements and is swapping them if the order is disturbed
         The average performance of this algorithm is  O(n^2)
     """
-    for i in range(len(array)):
-        for j in range(len(array)-1):
-            if array[i] < array[j]:
-                temp = array[i]
-                print(temp)
-                array[i] = array[j]
-                array[j] = temp
+    try:
+        for i in range(len(array)):
+            for j in range(len(array)-1):
+                if array[i] < array[j]:
+                    temp = array[i]
+                    print(temp)
+                    array[i] = array[j]
+                    array[j] = temp
+    except TypeError:
+        print("Your input array can't be a null value")
+
 
 def insert_sort(array) ->None:
-    leng = len(array)
-    for i in range(1 ,leng):
-        j = i
-        while array[j] < array[j-1] and j>0:
-            temp = array[j-1]
-            array[j-1] = array[j]
-            array[j] = temp
-            j-=1
+    try:
+        leng = len(array)
+        for i in range(1 ,leng):
+            j = i
+            while array[j] < array[j-1] and j>0:
+                temp = array[j-1]
+                array[j-1] = array[j]
+                array[j] = temp
+                j-=1
+    except TypeError:
+        print("Your input array can't be a null value")
 
 def quick_sort(arr, start_index, end_index) -> None:
-    if start_index < end_index:
-        index =__partition(arr, start_index, end_index)
-        quick_sort(arr, start_index, index)
-        quick_sort(arr, index+1, end_index)
+    try:
+        if start_index < end_index:
+            index =__partition(arr, start_index, end_index)
+            quick_sort(arr, start_index, index)
+            quick_sort(arr, index+1, end_index)
+    except TypeError:
+        print("Your input array can't be a null value")
 
 def __partition(arr, start_index, end_index) -> None:
     pivot = arr[end_index]
@@ -91,26 +101,25 @@ def counting_sort(array, num_range=0):
         2. Modify this array to hold at each index sum of previous index counts
         3. Output each number from the input sequence decreasing its count by 1
 
-    """    
-    if num_range ==0:
-        num_range = max(array)
+    """
+    try:
+        if num_range ==0:
+            num_range = max(array)
 
-    sorted_array = [0]*(len(array))
-    count_array = [0]*(num_range+1)
+        sorted_array = [0]*(len(array))
+        count_array = [0]*(num_range+1)
 
-    for iterator in range(len(array)):
-        count_array[array[iterator]] +=1
-    
-    for iterator in range(1 ,num_range+1):
-        count_array[iterator] += count_array[iterator -1]  
-    
-    for iterator in range(len(array)-1, -1, -1):
-        sorted_array[count_array[array[iterator]] -1 ] = array[iterator]
-        count_array[array[iterator]]-=1
-    
-    for iterator in range(len(array)):
-        array[iterator] = sorted_array[iterator]
-array = [1, 2, 5, 4]
-counting_sort(array)
-
-print(array)
+        for iterator in range(len(array)):
+            count_array[array[iterator]] +=1
+        
+        for iterator in range(1 ,num_range+1):
+            count_array[iterator] += count_array[iterator -1]  
+        
+        for iterator in range(len(array)-1, -1, -1):
+            sorted_array[count_array[array[iterator]] -1 ] = array[iterator]
+            count_array[array[iterator]]-=1
+        
+        for iterator in range(len(array)):
+            array[iterator] = sorted_array[iterator]
+    except (TypeError, ValueError):
+        print("Your array cannot be a null")
