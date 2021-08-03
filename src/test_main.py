@@ -1,4 +1,4 @@
-from main import *
+from src.main import Sorts
 import pytest
 #worth noting after using parametrize in test function it cant be reused in another 
 # After creating class and putting test methods in there parametrize works fine 
@@ -12,16 +12,16 @@ import pytest
 # items sorted asc
 class TestAsc:
     def test_bubble_sort(self, test_input, expected):
-        bubble_sort(test_input)
+        Sorts.bubble_sort(test_input)
         assert test_input == expected
 
     def test_insert_sort(self, test_input, expected):
-        insert_sort(test_input)
+        Sorts.insert_sort(test_input)
         assert test_input == expected
     
     def test_quick_sort(self, test_input, expected):
         try:
-            quick_sort(test_input, 0, len(test_input)-1)
+            Sorts.quick_sort(test_input, 0, len(test_input)-1)
             assert test_input == expected
         except TypeError:
             print("Your input array can't be a null value")
@@ -29,5 +29,5 @@ class TestAsc:
     #    assert True
     
     def test_counting_sort(self, test_input, expected):
-        counting_sort(test_input)
+        Sorts.counting_sort(test_input)
         assert test_input == expected
