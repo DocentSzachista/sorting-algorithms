@@ -16,10 +16,7 @@ class Sorts(object):
             for i in range(len(array)):
                 for j in range(len(array)-1):
                     if array[i] < array[j]:
-                        temp = array[i]
-                        print(temp)
-                        array[i] = array[j]
-                        array[j] = temp
+                        array[i], array[j] = array[j], array[i]
         except TypeError:
             print("Your input array can't be a null value")
 
@@ -30,12 +27,11 @@ class Sorts(object):
             for i in range(1 ,leng):
                 j = i
                 while array[j] < array[j-1] and j>0:
-                    temp = array[j-1]
-                    array[j-1] = array[j]
-                    array[j] = temp
+                    array[j-1] , array[j] = array[j] , array[j-1]
                     j-=1
         except TypeError:
             print("Your input array can't be a null value")
+
     @staticmethod
     def quick_sort(arr, start_index, end_index) -> None:
         try:
@@ -55,14 +51,15 @@ class Sorts(object):
             while arr[l] < pivot: l+=1
             while arr[r] > pivot: r-=1
             if l<r:
-                temp = arr[l]
-                arr[l]=arr[r]
-                arr[r]=temp
+                arr[l], arr[r] = arr[r], arr[l]
                 l+=1
                 r-=1
             else:
                 if r == end_index: r-=1
                 return r
+
+
+
     @staticmethod
     def merge_sort( array, left, right) -> None:
         if right > left:
@@ -70,6 +67,7 @@ class Sorts(object):
             Sorts.merge_sort(array,left, middle )
             Sorts.merge_sort(array,middle+1, right)
             Sorts.__merge(array, left, middle, right)
+
     @staticmethod
     def __merge(array, left, middle, right) -> None:
         sub_arr1=[]
@@ -88,12 +86,13 @@ class Sorts(object):
                 array[merged] = sub_arr2[index2]
                 index2+=1
             merged+=1
+            
     #A - tablica z liczbami do posortowania
     #B - posortowana tablica
     #C - helper tab 
     #K - maksymalny przedzial liczb
     @staticmethod
-    def counting_sort( array, num_range=0):
+    def counting_sort( array, num_range=0) -> None:
         """ Sorts the array by using counting sort algorithm
 
             Description
